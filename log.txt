@@ -1,0 +1,6 @@
+2021.05.14
+报错信息：
+    undefined reference to `vtable for Hero'
+解决方案：
+    基类的虚函数实现处要添加{}
+    析构函数也要添加{}

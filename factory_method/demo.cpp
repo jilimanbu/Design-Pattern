@@ -48,7 +48,7 @@ class ConcreteCreator2:public Creator{
 
 // 客户端代码
 void ClientCode(const Creator& creator){
-    // 客户端不知道具体的产品，但仍然可以了解产品做了什么
+    // 客户端不知道具体的产品，仍然可以使用产品
     std::cout << "Client: I'm not aware of the creator's class, but it still works.\n" << 
         creator.DoStuff() << std::endl;
 };

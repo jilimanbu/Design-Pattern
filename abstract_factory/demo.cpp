@@ -1,14 +1,14 @@
 #include <iostream>
 #include <string>
 
-class abstractProductA{
+class AbstractProductA{
 // 抽象产品类，定义了产品业务逻辑的接口
 public:
-    virtual ~abstractProductA(){};
+    virtual ~AbstractProductA(){};
     virtual std::string usefulFuction() const = 0;
 };
 
-class concreteProductA1:public abstractProductA{
+class ConcreteProductA1:public AbstractProductA{
 public:
 // 具体产品类，实现了具体的产品逻辑
     std::string usefulFuction() const override{
@@ -16,20 +16,20 @@ public:
     };
 };
 
-class concreteProductA2:public abstractProductA{
+class ConcreteProductA2:public AbstractProductA{
 public:
     std::string usefulFuction() const override{
         return "the result of the product A2.";
     }
 };
 
-class abstractProductB{
+class AbstractProductB{
 public:
-    virtual ~abstractProductB(){};
+    virtual ~AbstractProductB(){};
     virtual std::string usefulFuction() const = 0;
 };
 
-class concreteProductB1:public abstractProductB{
+class ConcreteProductB1:public AbstractProductB{
 public:
     std::string usefulFuction() const override
     {
@@ -37,7 +37,7 @@ public:
     };
 };
 
-class concreteProductB2:public abstractProductB{
+class ConcreteProductB2:public AbstractProductB{
 public:
     std::string usefulFuction() const override
     {
@@ -45,38 +45,38 @@ public:
     };
 };
 
-class abstractCreator{
+class AbstractCreator{
 // 抽象工厂类，定义了生成一系列相关产品的接口
 public:
-    virtual abstractProductA* createA() const = 0;
-    virtual abstractProductB* createB() const = 0;
+    virtual AbstractProductA* createA() const = 0;
+    virtual AbstractProductB* createB() const = 0;
 };
 
-class concreteCreator1:public abstractCreator{
+class ConcreteCreator1:public AbstractCreator{
 // 具体工厂类，实现了生成一系列具体产品
 public:
-    abstractProductA* createA() const override{
-        return new concreteProductA1(); 
+    AbstractProductA* createA() const override{
+        return new ConcreteProductA1(); 
     }
-    abstractProductB* createB() const override
+    AbstractProductB* createB() const override
     {
-        return new concreteProductB1();
+        return new ConcreteProductB1();
     }
 };
 
-class concreteCreator2:public abstractCreator{
+class ConcreteCreator2:public AbstractCreator{
 public:
-    abstractProductA* createA() const override{
-        return new concreteProductA2();
+    AbstractProductA* createA() const override{
+        return new ConcreteProductA2();
     }
-    abstractProductB* createB() const override{
-        return new concreteProductB2();
+    AbstractProductB* createB() const override{
+        return new ConcreteProductB2();
     }
 };
 
-void clientCode(abstractCreator* creator){
-    abstractProductA* productA = creator->createA();
-    abstractProductB* productB = creator->createB();
+void ClientCode(AbstractCreator* creator){
+    AbstractProductA* productA = creator->createA();
+    AbstractProductB* productB = creator->createB();
     std::cout<< productA->usefulFuction() <<std::endl;
     std::cout<< productB->usefulFuction() <<std::endl;
     delete productA;
@@ -86,13 +86,13 @@ void clientCode(abstractCreator* creator){
 
 int main(){
     std::cout << "Client: Testing client code with the first factory type:\n";
-    concreteCreator1* creator1 = new concreteCreator1();
-    clientCode(creator1);
+    ConcreteCreator1* creator1 = new ConcreteCreator1();
+    ClientCode(creator1);
     delete creator1;
     std::cout << std::endl;
     std::cout << "Client: Testing the same client code with the second factory type:\n";
-    concreteCreator2 *creator2 = new concreteCreator2();
-    clientCode(creator2);
+    ConcreteCreator2 *creator2 = new ConcreteCreator2();
+    ClientCode(creator2);
     delete creator2;
     system("pause");
     return 0;

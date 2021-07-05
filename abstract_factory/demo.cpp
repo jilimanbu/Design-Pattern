@@ -75,6 +75,7 @@ public:
 };
 
 void ClientCode(AbstractCreator* creator){
+    // 自行调用业务逻辑
     AbstractProductA* productA = creator->createA();
     AbstractProductB* productB = creator->createB();
     std::cout<< productA->usefulFuction() <<std::endl;
